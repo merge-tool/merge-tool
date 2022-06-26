@@ -63,6 +63,8 @@ const Home: NextPage = ({ data: _data }) => {
     return <button onClick={() => signIn()}>Sign in</button>
   }
 
+  console.log(data)
+
   return (
     <div>
       <button onClick={() => signOut()}>Sign out</button>
@@ -72,8 +74,7 @@ const Home: NextPage = ({ data: _data }) => {
           <h3>Error!</h3>
           <pre
             style={{maxHeight: '300px', maxWidth: '600px', overflow: 'scroll'}}
-            children={JSON.stringify(error, null, '    ')}
-          />
+          >{JSON.stringify(error, null, '    ')}</pre>
           <button onClick={() => errorDialogRef.current.close()}>Close</button>
         </dialog>
 
@@ -124,11 +125,11 @@ const Home: NextPage = ({ data: _data }) => {
 
         <hr />
 
-        <style children={`
+        <style>{`
           .search-items:nth-child(even) {
             background-color: #eee;
           }
-        `} />
+        `}</style>
         {data?.search?.edges && data.search.edges.map(({ node: pr }) => (
           <div key={pr.id} className="search-items" style={{
             display:'grid',
