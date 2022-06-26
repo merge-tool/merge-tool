@@ -83,7 +83,7 @@ const Home: NextPage = ({ data: _data }) => {
             type="text"
             style={{width: '32rem'}}
             placeholder="Search..."
-            defaultValue={router.query.q || 'is:pr '}
+            defaultValue={router.query.q}
           />
           <button disabled={searchState==='loading'}>
             {searchState === 'ready' && 'Search'}
@@ -245,9 +245,11 @@ export async function getServerSideProps(context) {
   let pagination = ''
   if (context.query.after) pagination = `, after: "${context.query.after}"`
   if (context.query.before) pagination = `, before: "${context.query.before}"`
+  let q = 'is:pr '
+  if (context.query.q) q += context.query.q
 
   const gql = `{
-    search(query: "${context.query.q}", type: ISSUE, first: 100${pagination}) {
+    search(query: "${q}", type: ISSUE, first: 100${pagination}) {
       edges {
         cursor
         node {
