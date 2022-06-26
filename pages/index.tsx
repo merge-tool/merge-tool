@@ -63,8 +63,6 @@ const Home: NextPage = ({ data: _data }) => {
     return <button onClick={() => signIn()}>Sign in</button>
   }
 
-  console.log(data)
-
   return (
     <div>
       <button onClick={() => signOut()}>Sign out</button>
